@@ -1,0 +1,5 @@
+regex
+stanfordcorenlp
+sqlalchemy
+psycopg2
+wait-for-it

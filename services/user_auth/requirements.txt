@@ -1,0 +1,6 @@
+sqlalchemy
+psycopg2
+httpx
+fastapi-jwt-auth
+passlib[bcrypt]
+wait-for-it

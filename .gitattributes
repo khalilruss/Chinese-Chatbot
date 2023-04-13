@@ -1,0 +1,2 @@
+services/chatbot/app/chatbot_utils/chatbot_model/pytorch_model.bin filter=lfs diff=lfs merge=lfs -text
+services/classifier/app/classification_model/state_dict_bert.pt filter=lfs diff=lfs merge=lfs -text

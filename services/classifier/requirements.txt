@@ -1,0 +1,6 @@
+torch
+transformers
+stanfordcorenlp
+sqlalchemy
+psycopg2
+wait-for-it

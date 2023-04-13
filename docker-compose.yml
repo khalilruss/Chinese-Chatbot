@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+
+  chatbot:
+    build: services/chatbot/
+    networks:
+      - fyp_network
+    container_name: chatbot
+  
+  classifier:
+    build: services/classifier/
+    environment:
+      ENV: "${ENV}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_PORT: "${POSTGRES_PORT}"
+    networks:
+      - fyp_network
+    container_name: classifier
+
+  grammar_extractor:
+    build: services/grammar_extractor/
+    environment:
+      ENV: "${ENV}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_PORT: "${POSTGRES_PORT}"
+    networks:
+      - fyp_network
+    container_name: grammar_extractor
+    
+  user_auth:
+    build: services/user_auth/
+    environment:
+      ENV: "${ENV}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_PORT: "${POSTGRES_PORT}"
+      ACCESS_TOKEN_SECRET: "${ACCESS_TOKEN_SECRET}"
+    networks:
+      - fyp_network
+    container_name: user_auth
+
+networks:
+  fyp_network:
+    driver: bridge

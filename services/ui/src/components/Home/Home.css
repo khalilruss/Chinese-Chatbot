@@ -1,0 +1,30 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-button {
+    height: 75px;
+    width: 500px;
+    margin: 5px;
+    border-color: #5a894b !important;
+    background-color: #5a894b !important;
+}
+.home-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25vw;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+  }

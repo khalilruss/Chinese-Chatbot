@@ -1,0 +1,26 @@
+.chat-wrapper {
+text-align: center;
+}
+
+.body-color{
+  background-color: white;
+} 
+
+.row{
+  margin: auto !important;
+}
+.chat_items_container{
+  padding-top: 2rem;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .box {
+    flex: 1;
+    justify-content: center;
+  }
+  .box:first-child > span { margin-right: auto; }
+  
+  .box:nth-child(2){flex: 1.25;}
+  
+  .box:last-child  > span { margin-left: auto;  }

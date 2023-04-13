@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  chatbot:
+    command: >
+      bash -c "pip install requests pytest coverage && 
+      python -m coverage run -m pytest && 
+      coverage report -m"
+
+  classifier:
+    command: >
+      bash -c "pip install requests pytest coverage && 
+      python -m coverage run -m pytest && 
+      rm ./tests/test.db && 
+      coverage report -m"
+
+  grammar_extractor:
+    command: >
+      bash -c "pip install requests pytest coverage && 
+      python -m coverage run -m pytest --ignore grammar/tests/test_grammar_rules.py && 
+      python grammar/tests/test_grammar_rules.py && 
+      rm ./tests/test.db && 
+      coverage report -m"
+  
+  user_auth:
+    command: >
+      bash -c "pip install requests pytest asynctest coverage && 
+      python -m coverage run -m pytest &&
+      rm ./tests/test.db &&  
+      coverage report -m"

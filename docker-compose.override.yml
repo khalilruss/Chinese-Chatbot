@@ -1,0 +1,82 @@
+version: '3'
+
+services:
+
+  chatbot:
+    ports:
+      - 8000:8000
+    volumes:
+      - './services/chatbot/app:/chatbot/app'
+    command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+  
+  classifier:
+    volumes:
+      - './services/classifier/app:/classifier/app'
+    ports:
+      - 8001:8001
+    command:  bash -c "wait-for-it
+      -t 30
+      -s db:${POSTGRES_PORT}
+      -s corenlp:9001
+      -- uvicorn main:app --host 0.0.0.0 --port 8001 --reload "
+
+  grammar_extractor:
+    volumes:
+      - './services/grammar_extractor/app:/grammar_extractor/app'
+    ports:
+      - 8002:8002
+    command:  bash -c "wait-for-it
+      -t 30
+      -s db:${POSTGRES_PORT}
+      -s corenlp:9001
+      -- uvicorn main:app --host 0.0.0.0 --port 8002 --reload "     
+
+  user_auth:
+    volumes:
+      - './services/user_auth/app:/user_auth/app'
+    ports:
+      - 8005:8005
+    command:  bash -c "wait-for-it 
+      -t 90
+      -s db:${POSTGRES_PORT}
+      -s chatbot:8000
+      -s grammar_extractor:8002
+      -s classifier:8001
+      -- uvicorn main:app --host 0.0.0.0 --port 8005 --reload "
+    
+  corenlp:
+    build: services/corenlp/
+    ports:
+    - 9001:9001
+    networks:
+    - fyp_network
+    container_name: corenlp
+
+  db:
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - ./services/db/${ENV}:/docker-entrypoint-initdb.d/
+    networks:
+      - fyp_network
+    container_name: db
+
+  ui:
+    build: services/ui/
+    ports:
+        - 3000:3000 
+    networks:
+      - fyp_network
+    container_name: ui
+    volumes:
+      - './services/ui/src:/ui/src'
+      - './services/ui/node_modules'  
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command:  bash -c "./wait-for-it.sh user_auth:8005 -s -t 80 -- npm start "
