@@ -3,7 +3,7 @@ A protype chatbot system that, through conversation in the form of messages, det
 user’s proficiency in Mandarin Chinese in an attempt to address the
 Language Learning Plateau.
 
-**See [here](Using%20Natural%20Language%20Processing%20and%20Machine%20Learning%20to%20address%20the%20Language%20Learning%20Plateau.pdf) for explanation video.** <br />
+**See [here](FYP_Chinese_Chatbot_Demo.mp4) for explanation video.** <br />
 **See [here](Using%20Natural%20Language%20Processing%20and%20Machine%20Learning%20to%20address%20the%20Language%20Learning%20Plateau.pdf) for full project report.**
 
 # System Architecture 
