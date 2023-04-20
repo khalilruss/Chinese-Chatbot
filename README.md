@@ -14,7 +14,7 @@ Grammar Extractor for grammar pattern extraction, coreNLP for tokenization and P
 # Implementation
 A range of different technologies and frameworks were used to implement the different services of the system. 
 - Docker and Docker-Compose: each service has a custom docker container and the docker-compose files defines the network of these containers allowing them to communicate. 
-- Pytorch: used for the fine-tuning of the generative chatbot model used in the chatbot service and for creating the classification model used in the classifier service. 
+- Pytorch: used for the fine-tuning of the generative chatbot model used in the chatbot service and for creating the classification model used in the classifier service (code can be found in the ‘ML_scripts’ directory). 
 - ReactJS: used to implement the user interface. 
 - FastAPI: used to implement all of the REST endpoints for the different services. 
 - Stanford CoreNLP: provides the tokenization and POS tagging used in the coreNLP service
